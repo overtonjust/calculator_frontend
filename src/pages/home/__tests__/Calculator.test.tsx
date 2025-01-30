@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, it, expect } from "vitest";
-import Calculator from "./Calculator";
+import Calculator from "../features/Calculator";
 
 describe('Calculator', () => {
     it('should render the calculator', () => {
@@ -36,5 +36,6 @@ describe('Calculator', () => {
         fireEvent.click(screen.getByText('x'));
         fireEvent.click(screen.getByText('4'));
 
+        expect(display).toHaveTextContent('2x4')
     })
 })

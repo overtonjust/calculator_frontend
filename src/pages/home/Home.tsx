@@ -1,5 +1,5 @@
 // Dependencies
-import Calculator from "./components/Calculator";
+import Calculator from "./features/Calculator";
 import './Home.scss';
 
 const Home = () => {
