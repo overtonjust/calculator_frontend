@@ -1,0 +1,13 @@
+
+
+.calc-history {
+    height: 300px;
+    width: 300px;
+    border: 2px solid #4f7c99;
+    background-color: #4f7c99;
+    border-radius: .4em;
+
+    &__item {
+        color: white;
+    }
+}

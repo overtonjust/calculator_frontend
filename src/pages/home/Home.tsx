@@ -1,12 +1,16 @@
 // Dependencies
-import Calculator from "./features/Calculator";
 import './Home.scss';
+
+// Features
+import Calculator from "./features/Calculator";
+import CalcHistory from './features/CalcHistory';
+
 
 const Home = () => {
     return (
         <main className="home">
            <Calculator/>
-           <section>calc info</section> 
+           <CalcHistory/>
         </main>
     );
 };
