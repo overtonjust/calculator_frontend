@@ -1,3 +1,5 @@
+const API = import.meta.env.VITE_API;
+
 const validateOperands = (
     event: React.MouseEvent<HTMLButtonElement>,
     display: string,
@@ -45,13 +47,21 @@ const handleBackSpace = (
     setDisplay(prev => prev.slice(0, -1))
 };
 
-const calculateDisplay = (
+const calculateDisplay = async (
     display: string,
     setDisplay: React.Dispatch<React.SetStateAction<string>>
 ) => {
     try {
-        eval(display)
+        await eval(display)
+        const calculation = `${display}=${eval(display)}`;
         setDisplay(prev => `${eval(prev)}`)   
+        fetch(`${API}/history/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({calculation: calculation})
+        });
     } catch (error) {
         setDisplay(prev => `${prev}\nFormat Error`)
     }
