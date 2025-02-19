@@ -10,6 +10,9 @@ import { FaRegEdit } from "react-icons/fa";
 // Context
 import { CalcContext } from '../context/CalcContext';
 
+// Modules
+import { removeCalculation } from '../modules/calcLogic';
+
 
 const CalcHistory = () => {
 
@@ -77,7 +80,10 @@ const CalcHistory = () => {
                                                 onClick={() => setCalcEditId(calc.id)}
                                                 />
                                             }
-                                            <CiSquareRemove className='calc-history__remove'/>
+                                            <CiSquareRemove 
+                                                className='calc-history__remove'
+                                                onClick={() => removeCalculation(calc.id, setCalcEditId)}
+                                                />
                                         </span>
                                     </div>
                                 )

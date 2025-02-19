@@ -80,6 +80,20 @@ const calculateDisplay = async (
     }
 }
 
+const removeCalculation = async (
+    calcEditId: number,
+    setCalcEditId: React.Dispatch<React.SetStateAction<number>>
+) => {
+    try {
+        fetch(`${API}/history/${calcEditId}`, {
+            method: 'DELETE'
+        })
+        setCalcEditId(-1)
+    } catch (error) {
+        return error;
+    }
+}
 
 
-export { updateDisplay, clearDisplay, validateOperands, handleBackSpace, calculateDisplay }
+
+export { updateDisplay, clearDisplay, validateOperands, handleBackSpace, calculateDisplay, removeCalculation }
