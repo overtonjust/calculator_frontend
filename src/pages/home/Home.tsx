@@ -5,12 +5,17 @@ import './Home.scss';
 import Calculator from "./features/Calculator";
 import CalcHistory from './features/CalcHistory';
 
+// Context
+import { CalcProvider } from './context/CalcContext';
 
 const Home = () => {
+
     return (
         <main className="home">
-           <Calculator/>
-           <CalcHistory/>
+            <CalcProvider>
+                <Calculator/>
+                <CalcHistory/>
+            </CalcProvider>
         </main>
     );
 };

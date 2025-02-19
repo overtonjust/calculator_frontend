@@ -1,9 +1,12 @@
 // Dependencies
-import { useState, } from 'react';
+import { useState, useContext } from 'react';
 import './Calculator.scss';
 
 // Components
 import { FaBackspace } from 'react-icons/fa';
+
+// Context
+import { CalcContext } from '../context/CalcContext';
 
 // Modules
 import { 
@@ -16,6 +19,7 @@ import {
 
 const Calculator = () => {
     const [display, setDisplay] = useState<string>('');
+    const { calcEditId, setCalcEditId } = useContext(CalcContext);
 
     return (
         <article className='calc'>
@@ -48,7 +52,7 @@ const Calculator = () => {
                 <button value={0} onClick={(e) => updateDisplay(e, setDisplay)} className='calc__btn'>0</button>
                 <button value={"."} onClick={(e) => validateOperands(e, display, setDisplay)} className='calc__btn'>.</button>
                 <button value={"del"} data-testid='backSpace' onClick={() => handleBackSpace(setDisplay)} className='calc__btn'><FaBackspace/></button>
-                <button data-testid='equals' className='calc__option-btn' onClick={() => calculateDisplay(display, setDisplay)} >=</button>
+                <button data-testid='equals' className='calc__option-btn' onClick={() => calculateDisplay(display, setDisplay, calcEditId, setCalcEditId)} >=</button>
             </section>
         </article>
     );

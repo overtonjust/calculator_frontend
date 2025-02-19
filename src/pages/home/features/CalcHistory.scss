@@ -4,10 +4,37 @@
     height: 300px;
     width: 300px;
     border: 2px solid #4f7c99;
-    background-color: #4f7c99;
-    border-radius: .4em;
+    background-color: #c7c7c7;
+    padding: 4px;
+    border-radius: 0 .4em .4em 0;
 
-    &__item {
-        color: white;
+    &__date {
+        color: #4f7c99;
+        border-bottom: 2px solid #4f7c99;
+        margin-bottom: 8px;
+    }
+
+    &__line-item{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__calc {
+    }
+
+    &__icon{
+
+    }
+
+    &__edit {
+        color: #4f7c99
+    }
+
+    &__edit, &__remove {
+        cursor: pointer;
+    }
+
+    &__remove{
+        color: red
     }
 }

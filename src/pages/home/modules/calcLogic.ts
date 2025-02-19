@@ -49,51 +49,37 @@ const handleBackSpace = (
 
 const calculateDisplay = async (
     display: string,
-    setDisplay: React.Dispatch<React.SetStateAction<string>>
+    setDisplay: React.Dispatch<React.SetStateAction<string>>,
+    calcEditId: number,
+    setCalcEditId: React.Dispatch<React.SetStateAction<number>>
 ) => {
     try {
         await eval(display)
         const calculation = `${display}=${eval(display)}`;
-        setDisplay(prev => `${eval(prev)}`)   
-        fetch(`${API}/history/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({calculation: calculation})
-        });
+        setDisplay(prev => `${eval(prev)}`)  
+        if(calcEditId > 0) {
+            fetch(`${API}/history/${calcEditId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({calculation: calculation})
+            })
+            setCalcEditId(-1)
+        } else {
+            fetch(`${API}/history/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({calculation: calculation})
+            });
+        }
     } catch (error) {
         setDisplay(prev => `${prev}\nFormat Error`)
     }
 }
 
-/* const calculateWithoutEval = (
-    display: string,
-    setDisplay: React.Dispatch<React.SetStateAction<string>>
-) =>  {
-    const nums: { [key: number]: string } = {};
-    const operands: { [key: number]: string } = {};
-    const elements = display.split('');
-    const numsRegex = /[0-9]/g;
-    let result = '';
-    let currNum = elements[0];
-    let key = 1;
-    if(!currNum.match(numsRegex)) {
-        setDisplay('Format error')
-    };
-    for(let idx = 1; idx < elements.length; ++idx) {
-        const digit = elements[idx];
-        if(!digit.match(numsRegex)) {
-            nums[key] = currNum;
-            operands[key] = digit;
-            currNum = ''
-            key++
-        } else {
-            currNum += digit;
-        }
-    };
-}
-*/
 
 
 export { updateDisplay, clearDisplay, validateOperands, handleBackSpace, calculateDisplay }
